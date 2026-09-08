@@ -9,7 +9,7 @@ summary: "A Shopify operations copilot where the model plans and deterministic P
 stack: ["LangGraph", "FastAPI", "MCP", "AGPL-3.0"]
 hasPage: true
 featured: true
-seoTitle: "Your.Store: a gated Shopify operations copilot — Sebin Shaiju"
+seoTitle: "Your.Store: a gated Shopify operations copilot · Sebin Shaiju"
 seoDescription: "An 18-node LangGraph supervisor for Shopify operations. The model plans, deterministic Python executes, and every write passes a human-approval interrupt the model cannot bypass."
 lede: "An operations copilot for Shopify stores, built so that the language model never holds the pen. It proposes; deterministic Python decides whether the proposal is even executable; a human approves before anything is written."
 facts:
@@ -21,19 +21,22 @@ facts:
 links:
   - label: "Source on GitHub"
     url: "https://github.com/5EBIN/Your.Store"
+video:
+  url: "https://drive.google.com/file/d/1gH0R7lhpJOTcsFlVPYase9cXaTagVEMI/preview"
+  title: "Your.Store demo: 5 minute walkthrough"
 images:
   - src: "/assets/your-store-1.png"
     alt: "Your.Store operations console showing a quick-question prompt and a morning briefing with revenue, low-stock and margin alerts"
-    caption: "The console at rest — a briefing on revenue, stock and margins, no write has happened yet."
+    caption: "The console at rest: a briefing on revenue, stock and margins, no write has happened yet."
   - src: "/assets/your-store-2.png"
     alt: "A pending-approval card proposing a 43-unit reorder, with Approve and execute and Reject buttons"
-    caption: "The approval gate. This is a node in the graph, not a prompt instruction — there's no phrasing that skips it."
+    caption: "The approval gate. This is a node in the graph, not a prompt instruction: there's no phrasing that skips it."
   - src: "/assets/your-store-3.png"
     alt: "A pending-approval card proposing a price change, with the same Approve and execute and Reject buttons"
-    caption: "A different action, same gate — reprice proposals pass through the identical approval node as reorders."
+    caption: "A different action, same gate: reprice proposals pass through the identical approval node as reorders."
   - src: "/assets/your-store-4.png"
     alt: "A natural-language answer to 'Should I restock Pink Armchair?' backed by a live catalog table"
-    caption: "Read-side queries answer straight from live catalog data — no approval needed, because nothing gets written."
+    caption: "Read-side queries answer straight from live catalog data. No approval needed, because nothing gets written."
 ---
 
 ## The problem
@@ -54,4 +57,4 @@ The codebase keeps a hard split: `core/` contains orchestration with no Shopify 
 
 ## Current state
 
-Working and in active development, with known open bugs rather than a claim of stability. The one I care most about is a regression on the MCP approval path, where a write approved through MCP does not execute afterwards — the same failure shape as an earlier hallucinated-write bug, which suggests a shared root cause around unrecognised intent degrading to a stale default rather than an honest failure.
+Working and in active development, with known open bugs rather than a claim of stability. The one I care most about is a regression on the MCP approval path, where a write approved through MCP does not execute afterwards, the same failure shape as an earlier hallucinated-write bug, which suggests a shared root cause around unrecognised intent degrading to a stale default rather than an honest failure.

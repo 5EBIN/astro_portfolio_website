@@ -8,15 +8,15 @@ metric: "1 day"
 summary: "Hackathon prototype from Cursor × eVoost at Hub71. A FastAPI intelligence microservice for real estate: deterministic property and district rankings, semantic search over OpenStreetMap amenity data, and an LLM layer that only explains and routes rather than computes."
 stack: ["FastAPI", "LangChain", "vector search over OpenStreetMap"]
 hasPage: true
-seoTitle: "myOS Real Estate: a deterministic property-intelligence API — Sebin Shaiju"
+seoTitle: "myOS Real Estate: a deterministic property-intelligence API · Sebin Shaiju"
 seoDescription: "A one-day hackathon FastAPI microservice: deterministic pandas rankings over real-estate data, Chroma semantic search over OpenStreetMap amenities, and a LangChain agent that only explains and routes, never computes."
-lede: "A FastAPI microservice that turns raw real-estate datasets into rankings, analytics and semantic search — built in a day for a Hub71 hackathon, with the LLM deliberately kept out of the arithmetic."
+lede: "A FastAPI microservice that turns raw real-estate datasets into rankings, analytics and semantic search, built in a day for a Hub71 hackathon, with the LLM deliberately kept out of the arithmetic."
 facts:
   Event: "Cursor × eVoost hackathon, Hub71 (Abu Dhabi AI PropTech Challenge)"
   Build time: "1 day"
-  Scoring: "Deterministic pandas rankings — no LLM in the calculation path"
+  Scoring: "Deterministic pandas rankings, no LLM in the calculation path"
   Search: "Chroma vector search over OpenStreetMap amenity data"
-  LLM role: "LangChain agent via OpenRouter (Claude Sonnet 4.5) — explains and routes only"
+  LLM role: "LangChain agent via OpenRouter (Claude Sonnet 4.5), explains and routes only"
   Output: "JSON API + PDF reports (ReportLab), Railway-deployable"
 links:
   - label: "Source on GitHub"
@@ -33,8 +33,8 @@ A FastAPI service ingests six synthetic datasets plus OpenStreetMap data and exp
 
 ## The design choice that mattered
 
-The project's own framing: the maths is deterministic Python, the LLM only explains and routes. Rankings and analytics come from pandas scoring with no model in the loop; a LangChain agent over OpenRouter (Claude Sonnet 4.5) sits on top to answer natural-language questions and decide which deterministic endpoint to call — not to compute the answer itself.
+The project's own framing: the maths is deterministic Python, the LLM only explains and routes. Rankings and analytics come from pandas scoring with no model in the loop; a LangChain agent over OpenRouter (Claude Sonnet 4.5) sits on top to answer natural-language questions and decide which deterministic endpoint to call, not to compute the answer itself.
 
 ## What it isn't
 
-Not a finished product. It's a one-day hackathon scope decision, not a launched service — deployment is Railway-ready, but built for a challenge deadline, not production traffic.
+Not a finished product. It's a one-day hackathon scope decision, not a launched service: deployment is Railway-ready, but built for a challenge deadline, not production traffic.

@@ -10,7 +10,7 @@ summary: "Income guarantees for gig workers that adapt every three minutes, matc
 stack: ["Python", "Gaussian process regression", "Hungarian algorithm"]
 hasPage: true
 featured: true
-seoTitle: "HIRE4GIG: adaptive income guarantees — Sebin Shaiju"
+seoTitle: "HIRE4GIG: adaptive income guarantees · Sebin Shaiju"
 seoDescription: "A gig-worker guarantee engine using EMA-smoothed Gaussian process regression and fairness-weighted Hungarian matching. 82% lower handout cost, Gini 0.11, 38ms per window. Patent filed."
 lede: "A guarantee engine that re-estimates what each worker can realistically earn every three minutes, then matches orders to workers with a cost function that prices fairness in directly."
 facts:
@@ -26,13 +26,13 @@ links:
 images:
   - src: "/assets/Hire4Gig.png"
     alt: "Landing screen of the HIRE4GIG app showing customer and agent entry points"
-    caption: "Entry point — customers and delivery agents come in through separate flows."
+    caption: "Entry point. Customers and delivery agents come in through separate flows."
   - src: "/assets/Hire4Gig-2.png"
     alt: "Restaurant listing screen"
     caption: "Order side. The matching engine sits behind this, invisible to the customer."
   - src: "/assets/Hire4Gig-3.png"
     alt: "Order tracking screen showing an assigned delivery agent"
-    caption: "Assignment result — the output of one Hungarian match, surfaced as a tracking step."
+    caption: "Assignment result: the output of one Hungarian match, surfaced as a tracking step."
 ---
 
 ## The problem
@@ -45,7 +45,7 @@ The guarantee needs to be personal, and it needs to move.
 
 A Gaussian process regressor estimates a demand curve per worker, smoothed with an exponential moving average so a single quiet window doesn't drag the estimate around. Every 180 seconds each worker's guarantee is recomputed against their own recent demand rather than a platform-wide average.
 
-Order assignment runs as a bipartite match using the Hungarian algorithm, with the cost function carrying a fairness term. Rather than always matching every worker to every order, it switches between k-nearest and full matching based on how much demand there actually is — which is where most of the runtime savings come from.
+Order assignment runs as a bipartite match using the Hungarian algorithm, with the cost function carrying a fairness term. Rather than always matching every worker to every order, it switches between k-nearest and full matching based on how much demand there actually is, which is where most of the runtime savings come from.
 
 ## Results
 
@@ -57,4 +57,4 @@ Over a simulated 50,000 orders across 14,880 time windows and 80 agents:
 
 ## What I'd change
 
-The evaluation is simulated. The demand model is fit to synthetic order flow, and a real platform's demand has structure — weather, events, restaurant closures — that the simulation doesn't contain. The fairness result is the one I'd most want to re-test against live data before claiming it holds.
+The evaluation is simulated. The demand model is fit to synthetic order flow, and a real platform's demand has structure (weather, events, restaurant closures) that the simulation doesn't contain. The fairness result is the one I'd most want to re-test against live data before claiming it holds.

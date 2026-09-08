@@ -28,7 +28,7 @@ Which raised the obvious next thought: if any instance can pick up the work, I c
 
 Run two instances and "any instance can pick up the work" stops being a nice property. Both read the database. Both reconstruct the same pipeline. Both decide the same step is next. Both run it. Both write.
 
-Now there's duplicated work, and — worse, for a system whose entire value is a trustworthy record — duplicated rows in an audit trail that is supposed to be exact.
+Now there's duplicated work. Worse, for a system whose entire value is a trustworthy record, there are duplicated rows in an audit trail that is supposed to be exact.
 
 ## The lock that makes it worse
 
@@ -40,11 +40,11 @@ A plain lock has a failure mode worse than having no lock at all. A worker claim
 
 So ownership can't mean *I own this*. It has to mean *I own this until a deadline, and I keep pushing the deadline out while I'm alive*. Go quiet past the deadline and someone else may take over.
 
-That expiry is doing something subtle. "Is that worker dead, or just slow?" is not a question you can answer over a network. The lease doesn't answer it either — it makes it irrelevant. Past the deadline, the system stops caring which one it is.
+That expiry is doing something subtle. "Is that worker dead, or just slow?" is not a question you can answer over a network. The lease doesn't answer it either: it makes it irrelevant. Past the deadline, the system stops caring which one it is.
 
 ## The one that actually scared me
 
-Instance A stalls. A long garbage-collection pause, a slow network call, anything — long enough that its lease expires. Instance B takes over and starts working.
+Instance A stalls. A long garbage-collection pause, a slow network call, anything, as long as it's long enough that its lease expires. Instance B takes over and starts working.
 
 Then A wakes up. It has no idea it was declared dead. It finishes its step and writes its result.
 
@@ -73,6 +73,6 @@ The one property that makes it work: the check and the write must happen as a si
 
 It has old, boring names. Leasing. Fencing tokens. Stateless workers over a stateful store. Celery has it. Sidekiq has it. Kubernetes' own controllers have it. I invented nothing. I re-derived, badly and over several evenings, why they all converged on the same shape.
 
-Which is the part I keep coming back to. The exciting work in agents right now is the model — reasoning, tools, autonomy. But what decides whether an agent survives production isn't the model. It's whether two copies of it can run at once without lying to each other.
+Which is the part I keep coming back to. The exciting work in agents right now is the model: reasoning, tools, autonomy. But what decides whether an agent survives production isn't the model. It's whether two copies of it can run at once without lying to each other.
 
 Chapter one was luck. Chapter two was realising the unglamorous distributed-systems layer isn't the plumbing under the product. It is the product.

@@ -55,6 +55,18 @@ const ogImage = `/og/projects/${data.slug}.png`;
 
     <div class="split">
       <div class="body-copy">
+        {data.video && (
+          <div class="video-embed">
+            <iframe
+              src={data.video.url}
+              title={data.video.title}
+              loading="lazy"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
+        )}
+
         <Content />
 
         {data.images && data.images.length > 0 && (

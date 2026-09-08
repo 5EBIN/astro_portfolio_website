@@ -9,9 +9,9 @@ summary: "Three CNNs averaged over 5,863 chest X-rays, with Grad-CAM heatmaps so
 stack: ["TensorFlow", "DenseNet121", "ResNet50", "MobileNetV2"]
 hasPage: true
 featured: true
-seoTitle: "Pneumonia detection with a three-model CNN ensemble — Sebin Shaiju"
+seoTitle: "Pneumonia detection with a three-model CNN ensemble · Sebin Shaiju"
 seoDescription: "DenseNet121, ResNet50 and MobileNetV2 averaged over 5,863 chest X-rays: 88.8% accuracy, 95% precision, 0.9487 ROC-AUC, with Grad-CAM explanations."
-lede: "Transfer learning from three pretrained CNNs, averaged, with Grad-CAM heatmaps attached to every prediction — because an unexplained 88% is not usable in a clinical setting."
+lede: "Transfer learning from three pretrained CNNs, averaged, with Grad-CAM heatmaps attached to every prediction, because an unexplained 88% is not usable in a clinical setting."
 facts:
   Models: "DenseNet121, ResNet50, MobileNetV2"
   Technique: "Transfer learning + ensemble averaging"
@@ -34,7 +34,7 @@ images:
 
 ## Approach
 
-Three architectures with different inductive biases — dense connectivity, residual depth, and a mobile-scale separable-convolution network — each fine-tuned from ImageNet weights, then averaged. Ensembling across architectures rather than across seeds is the point: the errors are less correlated.
+Three architectures with different inductive biases (dense connectivity, residual depth, and a mobile-scale separable-convolution network), each fine-tuned from ImageNet weights, then averaged. Ensembling across architectures rather than across seeds is the point: the errors are less correlated.
 
 Class imbalance in the dataset is handled with weighted training rather than resampling, to avoid discarding data from the smaller class.
 
@@ -44,4 +44,4 @@ Class imbalance in the dataset is handled with weighted training rather than res
 
 ## The honest caveat
 
-Precision at 95% with recall at 86% means the model misses roughly one in seven positive cases. In a screening context that ratio is the wrong way round — a missed pneumonia costs more than a false alarm — and the threshold should be moved before anyone treats this as decision support. The metrics above are reported at the default threshold, not a clinically chosen one.
+Precision at 95% with recall at 86% means the model misses roughly one in seven positive cases. In a screening context that ratio is the wrong way round: a missed pneumonia costs more than a false alarm, and the threshold should be moved before anyone treats this as decision support. The metrics above are reported at the default threshold, not a clinically chosen one.
