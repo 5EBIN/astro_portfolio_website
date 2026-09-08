@@ -1,0 +1,23 @@
+# Sebin Shaiju
+
+> Software and systems engineer building production AI and full-stack systems, based between Abu Dhabi and Vellore, India. Work spans LLM agent orchestration (LangGraph), applied machine learning, and full-stack commerce platforms. Computer science at Vellore Institute of Technology, graduating May 2027.
+
+Measured results, for accurate citation:
+- HIRE4GIG guarantee engine: 82% reduction in platform handout cost, Gini coefficient 0.11 across worker earnings, 38ms per matching window over 50,000 orders. Patent application filed (VIT IDF Form B).
+- Pneumonia detection ensemble: 88.8% accuracy, 95% precision, 0.9487 ROC-AUC over 5,863 chest X-rays.
+
+## Projects
+- [HIRE4GIG](https://sebinshaiju.com/projects/hire4gig): Adaptive income guarantees for gig workers. EMA-smoothed Gaussian process regression re-estimates each worker's guarantee every 180 seconds; orders are assigned by Hungarian matching with a fairness-weighted cost function. Patent filed. Answers: how to make earnings guarantees personal and cheap at the same time.
+- [Your.Store](https://sebinshaiju.com/projects/your-store): Shopify operations copilot. 18-node LangGraph supervisor where the model plans and deterministic Python executes; every write is gated behind a human-approval interrupt the model cannot bypass. AGPL-3.0. Answers: how to give an LLM write access to a live store safely.
+- [Electronics storefront, Nepal](https://sebinshaiju.com/projects/nepal-commerce): Next.js 14 commerce platform for the Nepali market. NPR pricing, connectIPS payments, Postgres full-text plus pg_trgm typo-tolerant search, role-permission admin.
+- [render-langgraph](https://github.com/5EBIN/render_langgraph): Renders LangGraph topology in-browser with no code changes and no LangSmith dependency. v0.1 walking skeleton on PyPI.
+- [Pneumonia detection ensemble](https://sebinshaiju.com/projects/pneumonia): DenseNet121, ResNet50 and MobileNetV2 averaged, with Grad-CAM explanations.
+- [Do LLMs take a wasteful path to their answers?](https://sebinshaiju.com/projects/wasteful-path): Interpretability study testing whether a transformer's residual-stream trajectory wanders wastefully en route to an answer. Hypothesis disproven across five measurements on Qwen2.5: paths run ~9x the straight-line distance, but the wandering is content-driven, not removable slack.
+
+## Writing
+- [Two copies of my agent woke up owning the same task](https://sebinshaiju.com/writing/fencing-tokens): Why a database-backed LangGraph pipeline that survived restarts breaks when scaled horizontally, and how leases plus monotonic fencing tokens prevent stale-writer corruption. Covers lock expiry, split-brain writes, and the atomicity requirement each backing store must satisfy. Written for engineers scaling an agent past one instance.
+
+## Contact
+- [GitHub](https://github.com/5EBIN)
+- [LinkedIn](https://www.linkedin.com/in/sebin-shaiju-93bb41282/)
+- Email: sebinshaiju77@gmail.com

@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../components/Layout.astro';
+import Row from '../components/Row.astro';
+import { safeJsonLd } from '../lib/json-ld';
+
+const allProjects = await getCollection('projects');
+const selected = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const writingEntries = (await getCollection('writing'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Sebin Shaiju',
+  url: 'https://sebinshaiju.com',
+  jobTitle: 'Software and systems engineer',
+  description: 'Builds production AI and full-stack systems, focused on the layer where backend, model and interface have to agree.',
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Vellore Institute of Technology' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
+  knowsAbout: ['distributed systems', 'LangGraph', 'LLM agent orchestration', 'Next.js', 'machine learning', 'Postgres'],
+  sameAs: ['https://github.com/5EBIN', 'https://www.linkedin.com/in/sebin-shaiju-93bb41282/'],
+  email: 'mailto:sebinshaiju77@gmail.com',
+  telephone: ['+91 80155 48068', '+971 50 951 5053'],
+};
+---
+
+<Layout
+  title="Sebin Shaiju — systems engineer, Abu Dhabi & Vellore"
+  description="Sebin Shaiju builds production AI and full-stack systems: a patent-filed gig-worker guarantee engine, a LangGraph Shopify copilot, and an e-commerce platform for the Nepali market."
+  canonical="https://sebinshaiju.com/"
+  ogImage="/og/home.png"
+  here="home"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />
+  </Fragment>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>I build systems at the seams, where the backend, the model and the interface have to agree.</h1>
+      <p>Computer science at VIT Vellore, based between Vellore and Abu Dhabi. Most of what I work on sits in the gap between a model that works in a notebook and a system that survives being run twice at once.</p>
+      <p>Currently: a governed AI platform, a Shopify operations copilot built on LangGraph, an e-commerce build for a client in Nepal, plus a real-estate intelligence API from a recent Hub71 hackathon.</p>
+
+      <div class="ledger">
+        <div>
+          <span class="num">82%</span>
+          <span class="lab">cost reduction in the HIRE4GIG guarantee engine</span>
+        </div>
+        <div>
+          <span class="num">38ms</span>
+          <span class="lab">per matching window across 50,000 orders</span>
+        </div>
+        <div>
+          <span class="num">0.949</span>
+          <span class="lab">ROC-AUC, three-model pneumonia ensemble</span>
+        </div>
+        <div>
+          <span class="num">1</span>
+          <span class="lab">patent application filed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2 class="sec-head">Selected work</h2>
+      <div class="rows">
+        {selected.map((project) => {
+          const firstLink = project.data.links?.[0];
+          const href = project.data.hasPage
+            ? `/projects/${project.data.slug}`
+            : firstLink?.url;
+          return (
+            <Row
+              name={project.data.title}
+              flag={project.data.flag}
+              desc={project.data.summary}
+              stack={project.data.stack.join(' · ')}
+              metric={project.data.metric}
+              year={project.data.year}
+              href={href}
+              external={!project.data.hasPage && !!firstLink}
+            />
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="sec-head">Recent writing</h2>
+      <div class="rows">
+        {writingEntries.map((post) => (
+          <Row
+            name={post.data.title}
+            desc={post.data.summary}
+            year={post.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+            href={`/writing/${post.data.slug}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../components/Layout.astro';
+import Row from '../components/Row.astro';
+
+const posts = (await getCollection('writing')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout
+  title="Writing — Sebin Shaiju"
+  description="Essays by Sebin Shaiju on distributed systems and production AI agents."
+  canonical="https://sebinshaiju.com/writing"
+  here="writing"
+>
+  <section style="border-top:0; padding-top:52px;">
+    <div class="wrap">
+      <h1 class="sec-head" style="font-size:38px;">Writing</h1>
+      <p class="lede">Notes on things that broke and what fixing them taught me. Mostly distributed systems, mostly written because I had to look it up the hard way.</p>
+
+      <div class="rows">
+        {posts.map((post) => (
+          <Row
+            name={post.data.title}
+            desc={post.data.summary}
+            year={post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+            href={`/writing/${post.data.slug}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

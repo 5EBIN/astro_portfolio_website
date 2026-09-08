@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import Aside from '../../components/Aside.astro';
+import { safeJsonLd } from '../../lib/json-ld';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.hasPage);
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+
+if (!data.lede || !data.facts) {
+  throw new Error(`Project "${data.slug}" has hasPage: true but is missing lede/facts.`);
+}
+
+const { Content } = await render(project);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: data.title,
+  description: data.seoDescription ?? data.summary,
+  keywords: data.stack.join(', '),
+  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju.com' },
+};
+
+const canonical = `https://sebinshaiju.com/projects/${data.slug}`;
+const ogImage = `/og/projects/${data.slug}.png`;
+---
+
+<Layout
+  title={data.seoTitle ?? data.title}
+  description={data.seoDescription ?? data.summary}
+  canonical={canonical}
+  ogType="article"
+  ogImage={ogImage}
+  here="projects"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />
+  </Fragment>
+
+  <div class="wrap">
+    <div class="detail-head">
+      <a class="back" href="/projects">&larr; All projects</a>
+      <h1>{data.title}</h1>
+      <p class="sub">{data.lede}</p>
+    </div>
+
+    <div class="split">
+      <div class="body-copy">
+        <Content />
+
+        {data.images && data.images.length > 0 && (
+          <div class="shots">
+            {data.images.map((img) => (
+              <figure>
+                <img src={img.src} alt={img.alt} />
+                {img.caption && <figcaption>{img.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Aside facts={data.facts} links={data.links} />
+    </div>
+  </div>
+</Layout>

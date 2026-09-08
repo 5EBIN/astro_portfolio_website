@@ -1,0 +1,70 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import Aside from '../../components/Aside.astro';
+import { safeJsonLd } from '../../lib/json-ld';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+
+const publishedDate = data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const isoDate = data.date.toISOString().slice(0, 10);
+const canonical = `https://sebinshaiju.com/writing/${data.slug}`;
+const ogImage = `/og/writing/${data.slug}.png`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.seoDescription ?? data.summary,
+  datePublished: isoDate,
+  dateModified: isoDate,
+  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju.com' },
+  keywords: data.tags,
+  mainEntityOfPage: canonical,
+};
+
+const facts = {
+  'Filed under': data.tags.join('\n'),
+  Published: publishedDate,
+  'Reading time': data.readingTime,
+};
+---
+
+<Layout
+  title={data.seoTitle ?? data.title}
+  description={data.seoDescription ?? data.summary}
+  canonical={canonical}
+  ogType="article"
+  ogImage={ogImage}
+  here="writing"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />
+  </Fragment>
+
+  <div class="wrap">
+    <div class="detail-head">
+      <a class="back" href="/writing">&larr; All writing</a>
+      <h1>{data.title}</h1>
+      <p class="sub">{publishedDate} &middot; {data.readingTime}</p>
+    </div>
+
+    <div class="split">
+      <div class="body-copy">
+        <Content />
+      </div>
+
+      <Aside facts={facts} links={data.links} />
+    </div>
+  </div>
+</Layout>

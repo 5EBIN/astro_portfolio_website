@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+  flag?: string;
+  desc: string;
+  stack?: string;
+  metric?: string;
+  year: string | number;
+  href?: string;
+  external?: boolean;
+  dataTags?: string;
+}
+
+const { name, flag, desc, stack, metric, year, href, external, dataTags } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const linkAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<Tag class="row" href={href} data-tags={dataTags} {...linkAttrs}>
+  <div class="rname">{name}{flag && <span class="flag">{flag}</span>}</div>
+  <div>
+    <div class="rdesc">{desc}</div>
+    {stack && <div class="rstack">{stack}</div>}
+  </div>
+  {metric ? (
+    <div class="rmetric">{metric}<div class="ryear">{year}</div></div>
+  ) : (
+    <div class="ryear">{year}</div>
+  )}
+</Tag>

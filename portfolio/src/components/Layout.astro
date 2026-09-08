@@ -1,0 +1,59 @@
+---
+import Seo from './Seo.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  here?: 'home' | 'projects' | 'writing';
+}
+
+const { title, description, canonical, ogType, ogImage, here } = Astro.props;
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;450;500&display=swap" />
+  <Seo title={title} description={description} canonical={canonical} ogType={ogType} ogImage={ogImage} />
+  <slot name="head" />
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="/">Sebin Shaiju</a>
+    <nav>
+      <a href="/" class={here === 'home' ? 'here' : undefined}>Home</a>
+      <a href="/projects" class={here === 'projects' ? 'here' : undefined}>Projects</a>
+      <a href="/writing" class={here === 'writing' ? 'here' : undefined}>Writing</a>
+      <a href="mailto:sebinshaiju77@gmail.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <slot />
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Abu Dhabi / Vellore</div>
+    <div>
+      <a href="https://github.com/5EBIN">GitHub</a> &nbsp;
+      <a href="https://www.linkedin.com/in/sebin-shaiju-93bb41282/">LinkedIn</a> &nbsp;
+      <a href="mailto:sebinshaiju77@gmail.com">Email</a> &nbsp;
+      <a href="tel:+918015548068">+91 80155 48068</a> &nbsp;
+      <a href="tel:+971509515053">+971 50 951 5053</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
