@@ -18,7 +18,7 @@ const { Content } = await render(post);
 
 const publishedDate = data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const isoDate = data.date.toISOString().slice(0, 10);
-const canonical = `https://sebinshaiju.com/writing/${data.slug}`;
+const canonical = `https://sebinshaiju-portfolio.netlify.app/writing/${data.slug}`;
 const ogImage = `/og/writing/${data.slug}.png`;
 
 const jsonLd = {
@@ -28,7 +28,7 @@ const jsonLd = {
   description: data.seoDescription ?? data.summary,
   datePublished: isoDate,
   dateModified: isoDate,
-  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju.com' },
+  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju-portfolio.netlify.app' },
   keywords: data.tags,
   mainEntityOfPage: canonical,
 };

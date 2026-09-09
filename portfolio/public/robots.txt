@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://sebinshaiju.com/sitemap.xml
+Sitemap: https://sebinshaiju-portfolio.netlify.app/sitemap-index.xml

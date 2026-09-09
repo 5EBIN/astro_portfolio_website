@@ -78,7 +78,7 @@ export async function renderOgPng({ eyebrow, title, subtitle, stats }: OgImagePr
             },
             children: [
               { type: 'div', props: { style: { fontFamily: 'Newsreader', fontWeight: 500, fontSize: '30px', color: INK }, children: 'Sebin Shaiju' } },
-              { type: 'div', props: { style: { fontFamily: 'IBM Plex Sans', fontSize: '20px', color: SOFT }, children: 'sebinshaiju.com' } },
+              { type: 'div', props: { style: { fontFamily: 'IBM Plex Sans', fontSize: '20px', color: SOFT }, children: 'sebinshaiju-portfolio.netlify.app' } },
             ],
           },
         },

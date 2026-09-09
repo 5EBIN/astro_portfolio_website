@@ -27,10 +27,10 @@ const jsonLd = {
   name: data.title,
   description: data.seoDescription ?? data.summary,
   keywords: data.stack.join(', '),
-  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju.com' },
+  author: { '@type': 'Person', name: 'Sebin Shaiju', url: 'https://sebinshaiju-portfolio.netlify.app' },
 };
 
-const canonical = `https://sebinshaiju.com/projects/${data.slug}`;
+const canonical = `https://sebinshaiju-portfolio.netlify.app/projects/${data.slug}`;
 const ogImage = `/og/projects/${data.slug}.png`;
 ---
 

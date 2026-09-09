@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://sebinshaiju.com',
+  site: 'https://sebinshaiju-portfolio.netlify.app',
   output: 'static',
   integrations: [sitemap()],
   markdown: {
